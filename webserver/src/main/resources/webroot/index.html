@@ -1,0 +1,185 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="js/vertx/sockjs.min.js"></script>
+    <script src="js/vertx/vertxbus.js"></script>
+
+
+
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/home">
+                <img alt="Brand" src="image/logo-04.png" width="80" height="26">
+            </a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;<b>Dashboard 1</b></a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="/dashboard.html"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;<b>Dashboard 2</b></a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="/log.html"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;<b>Logs</b></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2 align="center">Skull</h2>
+        </div>
+        <div class="col-md-6">
+            <h2 align="center">Ground Shock</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <div  id="SkullSpeedGaugeContainer"></div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4" style="align-content: center">
+            <div style="align-content: center" id="GroundShockSpeedGaugeContainer"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <br/>
+
+            <div class="progress">
+                <div id="SkullBatteryLevel" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span id="current-progress"></span>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <br/>
+
+            <div class="progress">
+                <div id="GroundShockBatteryLevel" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span id="current-progress"></span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</div> <!-- /container -->
+
+
+
+<hr />
+
+
+<!-- Include dependencies -->
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/jquery/jquery-ui-widget.min.js"></script>
+<script src="js/d3/d3.min.js"></script>
+
+<script type="text/javascript" src="./js/d3/gauge.js"></script>
+
+<script src="js/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script>
+    var gauges = [];
+
+    function createGauge(name, label, min, max)
+    {
+        var config =
+        {
+            size: 300,
+            label: label,
+            min: undefined != min ? min : 0,
+            max: undefined != max ? max : 1300,
+            minorTicks: 5
+        }
+
+        var range = config.max - config.min;
+        config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+        config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+
+        gauges[name] = new Gauge(name + "GaugeContainer", config);
+        gauges[name].render();
+    }
+
+    function createGauges()
+    {
+        createGauge("SkullSpeed", "Speed");
+        createGauge("GroundShockSpeed", "Speed");
+    }
+
+    function updateSpeed(car, value)
+    {
+        console.log( "speed "+ car +" "+ value )
+
+        gauges[car+ "Speed"].redraw(value);
+    }
+
+    function updateBattery(car, value) {
+        $("#"+ car  +"BatteryLevel")
+                .css("width", value + "%")
+                .attr("aria-valuenow", value)
+                .text(value + "%");
+    }
+
+
+    function initialize()
+    {
+        createGauges();
+    }
+
+
+    var eb = new vertx.EventBus("http://" + location.host + "/eventbus");
+    eb.onopen = function() {
+        console.log("open");
+        eb.registerHandler("dashboard", function(data) {
+            var entry = JSON.parse(data);
+            console.log(data);
+            if (entry.type == "position") {
+                updateSpeed(entry.carName, entry.speed);
+            } else if (entry.type == "battery") {
+                updateBattery( entry.carName, entry.level  );
+            }
+        });
+    };
+
+
+    initialize();
+
+
+
+</script>
+
+
+
+</body>
+</html>

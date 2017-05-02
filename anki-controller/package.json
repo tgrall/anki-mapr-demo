@@ -1,0 +1,25 @@
+{
+  "name": "anki-node-drive",
+  "description": "Anki Overdrive SDK using Node and BTLE Edit",
+  "version": "0.0.1",
+  "author": "gravesjohnr",
+  "contributors" : ["tgrall"],
+  "dependencies": {
+    "noble": "~1.2.1",
+    "async": "0.9.2",
+    "properties": "1.2.1",
+    "express" : "4.14.0",
+    "body-parser" : "1.15.2",
+    "canvas" : "1.6.2",
+    "mqtt" : "1.5",
+    "kafka-rest" : "0.0.5",
+    "command-line-args" : "4.0.3" 
+  },
+  "keywords": [
+    "node",
+    "iot",
+    "anki",
+    "overdrive"
+  ],
+  "license": "GPL-3.0"
+}

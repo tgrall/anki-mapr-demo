@@ -1,0 +1,49 @@
+
+
+curl -i -X POST http://127.0.0.1:7877/rescan
+
+
+curl -i http://127.0.0.1:7877/getDevices
+
+
+
+curl -X POST -i http://127.0.0.1:7877/connect/Skull
+
+curl -X POST -i http://127.0.0.1:7877/connect/Ground+Shock
+
+curl -X POST -i http://127.0.0.1:7877/turnOnLogging/Skull
+
+curl -X POST -i http://127.0.0.1:7877/turnOnLogging/Ground+Shock
+
+
+curl -X POST -i http://127.0.0.1:7877/setSpeed/Skull/400
+
+curl -X POST -i http://127.0.0.1:7877/setSpeed/Ground+Shock/550
+
+
+curl -X POST -i http://127.0.0.1:7877/setSpeed/Skull/0
+
+
+curl -X POST -i http://127.0.0.1:7877/disconnect/Skull
+
+
+curl -X POST -i http://127.0.0.1:7877/uturn/Skull
+
+
+{"type":"position","timeStamp":1489110320205,"carName":"GroundShock","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":498,"clockwise":false}
+
+
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":798,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":798,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":498,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":498,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":498,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":498,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":498,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":698,"clockwise":false}
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":698,"clockwise":false}
+
+
+{"type":"position","timeStamp":1489110320205,"carName":"Skull","trackId":33,"trackLocation":8,"offset":51.243995666503906,"speed":1098,"clockwise":false}
+
+{"type":"battery","timeStamp":1489110320205,"carName":"Skull", "level" : 60 }
