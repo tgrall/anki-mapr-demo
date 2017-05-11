@@ -4,7 +4,7 @@ var trackMap = require('./trackMap.js')();
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
@@ -29,11 +29,11 @@ app.use(bodyParser.json());
  *   "result": "Success"
  * }
  */
-app.post('/connect/:carname', function (req, res) {
+app.post('/connect/:carname', function(req, res) {
     var carName = req.params.carname
-    console.log("Trying to connect to "+carName)
+    console.log("Trying to connect to " + carName)
     ankiNodeUtils.connectCar(carName);
-    res.send(JSON.stringify({ result: "Success"}));
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -57,11 +57,11 @@ app.post('/connect/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/disconnect/:carname', function (req, res) {
+app.post('/disconnect/:carname', function(req, res) {
     var carName = req.params.carname
-    console.log("Trying to disonnect to "+carName)
+    console.log("Trying to disonnect to " + carName)
     ankiNodeUtils.disconnectCar(carName);
-    res.send(JSON.stringify({ result: "Success"}));
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -86,12 +86,12 @@ app.post('/disconnect/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/setSpeed/:carname/:speedValue', function (req, res) {
-  var carName = req.params.carname
-  var speed = req.params.speedValue
-  ankiNodeUtils.setSpeed(carName,speed);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/setSpeed/:carname/:speedValue', function(req, res) {
+    var carName = req.params.carname
+    var speed = req.params.speedValue
+    ankiNodeUtils.setSpeed(carName, speed);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -120,12 +120,12 @@ app.post('/setSpeed/:carname/:speedValue', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/changeLanes/:carname/:changeValue', function (req, res) {
-  var carName = req.params.carname
-  var change = req.params.changeValue
-  ankiNodeUtils.changeLanes(carName,change);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/changeLanes/:carname/:changeValue', function(req, res) {
+    var carName = req.params.carname
+    var change = req.params.changeValue
+    ankiNodeUtils.changeLanes(carName, change);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -154,12 +154,12 @@ app.post('/changeLanes/:carname/:changeValue', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/setLaneOffset/:carname/:changeValue', function (req, res) {
-  var carName = req.params.carname
-  var change = req.params.changeValue
-  ankiNodeUtils.setLaneOffset(carName,change);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/setLaneOffset/:carname/:changeValue', function(req, res) {
+    var carName = req.params.carname
+    var change = req.params.changeValue
+    ankiNodeUtils.setLaneOffset(carName, change);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -182,10 +182,10 @@ app.post('/setLaneOffset/:carname/:changeValue', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/turnOnHeadlights/:carname', function (req, res) {
-  result = ankiNodeUtils.setLights(req.params.carname,0x44);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/turnOnHeadlights/:carname', function(req, res) {
+    result = ankiNodeUtils.setLights(req.params.carname, 0x44);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -208,10 +208,10 @@ app.post('/turnOnHeadlights/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/turnOffHeadlights/:carname', function (req, res) {
-  result = ankiNodeUtils.setLights(req.params.carname,0x04);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/turnOffHeadlights/:carname', function(req, res) {
+    result = ankiNodeUtils.setLights(req.params.carname, 0x04);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -234,10 +234,10 @@ app.post('/turnOffHeadlights/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/turnOnTaillights/:carname', function (req, res) {
-  result = ankiNodeUtils.setLights(req.params.carname,0x22);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/turnOnTaillights/:carname', function(req, res) {
+    result = ankiNodeUtils.setLights(req.params.carname, 0x22);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -260,10 +260,10 @@ app.post('/turnOnTaillights/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/flashTaillights/:carname', function (req, res) {
-  result = ankiNodeUtils.setLights(req.params.carname,0x88);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/flashTaillights/:carname', function(req, res) {
+    result = ankiNodeUtils.setLights(req.params.carname, 0x88);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -286,10 +286,10 @@ app.post('/flashTaillights/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/turnOffTaillights/:carname', function (req, res) {
-  result = ankiNodeUtils.setLights(req.params.carname,0x02);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/turnOffTaillights/:carname', function(req, res) {
+    result = ankiNodeUtils.setLights(req.params.carname, 0x02);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -315,10 +315,10 @@ app.post('/turnOffTaillights/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/setEngineLight/:carName/:red/:green/:blue', function (req, res) {
-  ankiNodeUtils.setEngineLight(req.params.carName,req.params.red,req.params.green,req.params.blue);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.post('/setEngineLight/:carName/:red/:green/:blue', function(req, res) {
+    ankiNodeUtils.setEngineLight(req.params.carName, req.params.red, req.params.green, req.params.blue);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -341,12 +341,12 @@ app.post('/setEngineLight/:carName/:red/:green/:blue', function (req, res) {
  *   "ping": "Success"
  * }
  */
-app.get('/ping/:carname', function (req, res) {
-  ankiNodeUtils.ping(req.params.carname).then(function(data) {
-    res.send(JSON.stringify({ ping: data}));
-    console.log("Returning value");
-    res.end();
-  });
+app.get('/ping/:carname', function(req, res) {
+    ankiNodeUtils.ping(req.params.carname).then(function(data) {
+        res.send(JSON.stringify({ ping: data }));
+        console.log("Returning value");
+        res.end();
+    });
 });
 
 /**
@@ -369,21 +369,21 @@ app.get('/ping/:carname', function (req, res) {
  *   {"battery":97}
  * }
  */
-app.get('/batteryLevel/:carname', function (req, res) {
-  ankiNodeUtils.batteryLevel(req.params.carname).then(function(level) {
-    res.send(JSON.stringify({ battery: level}));
-    console.log("Returning value");
-    res.end();
-  });
+app.get('/batteryLevel/:carname', function(req, res) {
+    ankiNodeUtils.batteryLevel(req.params.carname).then(function(level) {
+        res.send(JSON.stringify({ battery: level }));
+        console.log("Returning value");
+        res.end();
+    });
 });
 
 //////////////////////////////////////////////////////////
 // Do a U-Turn
 //////////////////////////////////////////////////////////
-app.get('/uturn/:carname', function (req, res) {
-  ankiNodeUtils.uTurn(req.params.carname);
-  res.send(JSON.stringify({ result: "Success"}));
-  res.end();
+app.get('/uturn/:carname', function(req, res) {
+    ankiNodeUtils.uTurn(req.params.carname);
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
 });
 
 /**
@@ -411,10 +411,10 @@ app.get('/uturn/:carname', function (req, res) {
  *             "state":"disconnected","serviceUuids":"be15beef6186407e83810bd89c4d8df4"}]}
  * }
  */
-app.get('/getDevices', function (req, res) {
-  res.contentType('application/json');
-  res.send(JSON.stringify({ carList: carList}));
-  res.end();
+app.get('/getDevices', function(req, res) {
+    res.contentType('application/json');
+    res.send(JSON.stringify({ carList: carList }));
+    res.end();
 });
 
 /**
@@ -435,10 +435,10 @@ app.get('/getDevices', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/rescan', function (req, res) {
+app.post('/rescan', function(req, res) {
     console.log("Rescan");
     ankiNodeUtils.rescan();
-    res.send(JSON.stringify({ result: "Success"}));
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -462,11 +462,11 @@ app.post('/rescan', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/turnOnLogging/:carname', function (req, res) {
+app.post('/turnOnLogging/:carname', function(req, res) {
     var carName = req.params.carname
-    console.log("turn on logging: "+carName);
+    console.log("turn on logging: " + carName);
     ankiNodeUtils.turnOnLogging(carName);
-    res.send(JSON.stringify({ result: "Success"}));
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -492,13 +492,13 @@ app.post('/turnOnLogging/:carname', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.post('/trackCountTravel/:carname/:trackCount/:speed', function (req, res) {
+app.post('/trackCountTravel/:carname/:trackCount/:speed', function(req, res) {
     var carName = req.params.carname
     var trackCount = req.params.trackCount
     var speed = req.params.speed
-    console.log("trackCountTravel: "+carName+" - "+trackCount+" - "+speed);
-    ankiNodeUtils.trackCountTravel(carName,trackCount,speed);
-    res.send(JSON.stringify({ result: "Success"}));
+    console.log("trackCountTravel: " + carName + " - " + trackCount + " - " + speed);
+    ankiNodeUtils.trackCountTravel(carName, trackCount, speed);
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -520,12 +520,12 @@ app.post('/trackCountTravel/:carname/:trackCount/:speed', function (req, res) {
  * HTTP/1.1 200 OK
  *   UTF8 - image/png
  */
-app.post('/mapTrack/:carname', function (req, res) {
+app.post('/mapTrack/:carname', function(req, res) {
     var carName = req.params.carname
-    console.log("Connecting to car: "+carName);
-    console.log("Mapping the track using car: "+carName);
-    ankiNodeUtils.mapTrack(carName,trackMap);
-    res.send(JSON.stringify({ result: "Success"}));
+    console.log("Connecting to car: " + carName);
+    console.log("Mapping the track using car: " + carName);
+    ankiNodeUtils.mapTrack(carName, trackMap);
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -545,25 +545,25 @@ app.post('/mapTrack/:carname', function (req, res) {
  * HTTP/1.1 200 OK
  *   UTF8 - image/png
  */
-app.post('/mapSave', function (req, res) {
+app.post('/mapSave', function(req, res) {
     console.log("Saving Map");
 
-    if(trackMap.isTrackMapDone() == false) {
-      res.send(JSON.stringify({ result: "Error", message: "Track map has not completed.  Use '/mapTrack' API and wait for the car to stop."}));
-      res.end();
-      return;
+    if (trackMap.isTrackMapDone() == false) {
+        res.send(JSON.stringify({ result: "Error", message: "Track map has not completed.  Use '/mapTrack' API and wait for the car to stop." }));
+        res.end();
+        return;
     }
     var mapArray = trackMap.getTrackMapData();
-    console.log(JSON.stringify({ map: mapArray}));
+    console.log(JSON.stringify({ map: mapArray }));
     require("fs").writeFile(
-     "mapData.out",
-     mapArray.map(function(v){ return v.join(', ')}).join('\n'),
-     function (err) { console.log(err ? 'Error :'+err : 'ok') }
+        "mapData.out",
+        mapArray.map(function(v) { return v.join(', ') }).join('\n'),
+        function(err) { console.log(err ? 'Error :' + err : 'ok') }
     );
 
     console.log("The file was saved!");
 
-    res.send(JSON.stringify({ result: "Success"}));
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -583,25 +583,25 @@ app.post('/mapSave', function (req, res) {
  * HTTP/1.1 200 OK
  *   UTF8 - image/png
  */
-app.post('/mapLoad', function (req, res) {
+app.post('/mapLoad', function(req, res) {
     console.log("Loading Map");
 
     var fs = require('fs');
     var mapArray = fs.readFileSync('mapData.out').toString().split("\n");
     // Convert it to an array of ints
-    for(i in mapArray) {
-      mapArray[i] = mapArray[i].split(',');
-      for(j in mapArray[i]) {
-        mapArray[i][j] = parseInt(mapArray[i][j]);
-      }
+    for (i in mapArray) {
+        mapArray[i] = mapArray[i].split(',');
+        for (j in mapArray[i]) {
+            mapArray[i][j] = parseInt(mapArray[i][j]);
+        }
     }
 
     console.log("The file was loaded!");
-    console.log(JSON.stringify({ map: mapArray}));
+    console.log(JSON.stringify({ map: mapArray }));
     trackMap.setTrackMapDone();
     trackMap.setTrackMapData(mapArray);
 
-    res.send(JSON.stringify({ result: "Success"}));
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
@@ -644,14 +644,14 @@ app.post('/mapLoad', function (req, res) {
  *   "map": "[[0,0],[1,2],[3,2],[5,6]]"
  * }
  */
-app.get('/getTrackMapData', function (req, res) {
-    if(trackMap.isTrackMapDone() == false) {
-      res.send(JSON.stringify({ result: "Error", message: "Track map has not completed.  Use '/mapTrack' API and wait for the car to stop."}));
-      res.end();
-      return;
+app.get('/getTrackMapData', function(req, res) {
+    if (trackMap.isTrackMapDone() == false) {
+        res.send(JSON.stringify({ result: "Error", message: "Track map has not completed.  Use '/mapTrack' API and wait for the car to stop." }));
+        res.end();
+        return;
     }
     var mapArray = trackMap.getTrackMapData();
-    res.send(JSON.stringify({ map: mapArray}));
+    res.send(JSON.stringify({ map: mapArray }));
     res.end();
 });
 
@@ -675,75 +675,63 @@ app.get('/getTrackMapData', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.get('/getTrackMap/:size', function (req, res) {
+app.get('/getTrackMap/:size', function(req, res) {
     var size = req.params.size
-    if(size != "small" && size != "medium" && size != "large") {
-      res.send(JSON.stringify({ result: "Error", message: "Size must be 'small', 'medium' or 'large'"}));
-      res.end();
-      return;
+    if (size != "small" && size != "medium" && size != "large") {
+        res.send(JSON.stringify({ result: "Error", message: "Size must be 'small', 'medium' or 'large'" }));
+        res.end();
+        return;
     }
-    if(trackMap.isTrackMapDone() == false) {
-      res.send(JSON.stringify({ result: "Error", message: "Track map has not completed.  Use '/mapTrack' API and wait for the car to stop."}));
-      res.end();
-      return;
+    if (trackMap.isTrackMapDone() == false) {
+        res.send(JSON.stringify({ result: "Error", message: "Track map has not completed.  Use '/mapTrack' API and wait for the car to stop." }));
+        res.end();
+        return;
     }
     var canvas = trackMap.getTrackMap(size);
-//    res.send('<img src="' + canvas.toDataURL() + '" />');
+    //    res.send('<img src="' + canvas.toDataURL() + '" />');
     var stream = canvas.createPNGStream();
     res.type("png");
-    stream.pipe(res);   
+    stream.pipe(res);
 });
 
-app.get('/exit', function (req, res) {
-    res.send(JSON.stringify({ result: "Success"}));
+app.get('/exit', function(req, res) {
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
     process.exit();
 });
 
-app.get('/ping', function (req, res) {
-    res.send(JSON.stringify({ result: "Success"}));
+app.get('/ping', function(req, res) {
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 });
 
-/**
- * @api {get} /startDemo/ startDemo
- * @apiName startDemo
- * @apiGroup Demo
- * @apiVersion 1.0.0
- * @apiDescription
- * Connect to all cars found, enable logging and start the cars
- *
- * @apiExample {curl} Example usage:
- *     curl -i -X GET http://127.0.0.1:7877/startDemo/
- *
- * @apiSampleRequest http://127.0.0.1:7877/startDemo/
- * @apiSuccessExample Success-Response
- * HTTP/1.1 200 OK
- * {
- *   "result": "Success"
- * }
- */
-app.get('/startDemo/', function (req, res) {
-    console.log("StartDemo");
-    ankiNodeUtils.startDemo();
-    res.send(JSON.stringify({ result: "Success"}));
+app.get('/startDemoConnect/', function(req, res) {
+    console.log("StartDemoConnect");
+    ankiNodeUtils.startDemoConnect();
+    res.send(JSON.stringify({ result: "Success" }));
     res.end();
 
-}
-);
+});
 
+app.get('/startDemoGo/', function(req, res) {
+    console.log("StartDemo");
+    ankiNodeUtils.startDemoGo();
+    res.send(JSON.stringify({ result: "Success" }));
+    res.end();
+
+});
 
 app.use('/', express.static('apidoc'));
 
 //////////////////////////////////////////////////////////
 // Start listener
 //////////////////////////////////////////////////////////
-var server = app.listen(7877, function () {
-  console.log("Example app listening at http://pi:7877");
-  var host="pi";
-  var port="7877";
-  console.log("http://%s:%s/getDevices",host,port);
-  console.log("http://%s:%s/connect/:carname",host,port);
-  console.log("http://%s:%s/setSpeed/:carname/:speedValue",host,port);
-  console.log("http://%s:%s/setLights/:carname/:lightValue",host,port);
+var server = app.listen(7877, function() {
+    console.log("Example app listening at http://pi:7877");
+    var host = "pi";
+    var port = "7877";
+    console.log("http://%s:%s/getDevices", host, port);
+    console.log("http://%s:%s/connect/:carname", host, port);
+    console.log("http://%s:%s/setSpeed/:carname/:speedValue", host, port);
+    console.log("http://%s:%s/setLights/:carname/:lightValue", host, port);
 })
