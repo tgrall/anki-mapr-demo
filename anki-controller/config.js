@@ -2,9 +2,10 @@
  * Configuration file for the application
  * 
  * mode: 
- *  if you have configured the kit name (eg : fr | uk) and set the list of cars
+ *  if you have configured the kit name (eg : fr | uk | nl) and set the list of cars
  *  mode : uk-> will use the UK cars
  *  mode : fr-> will use the FR cars
+ *  mode : nl-> will use the NL cars
  *  node : discover -> will use any "cars" with the risk of conflict
  * 
  * cars : OPTIONAL
@@ -19,13 +20,13 @@
  *    - put the mode to "discover"
  *    - or cars should be empty
  * 
- * See below for the values of UK, FR kits
+ * See below for the values of UK, FR, NL kits
  * 
  * 
  ************************************************/
 
 module.exports = {
-    mode: "uk", // discover | uk | fr
+    mode: "nl", // discover | uk | fr | nl
     frCars: [{
             "carName": "Skull",
             "address": "de:d5:50:6b:e0:43"
@@ -51,7 +52,20 @@ module.exports = {
             "carName": "Nuke",
             "address": "e6:25:f8:72:c8:1d",
         }
-    ]
+    ],
+    nlCars: [{
+            "carName": "Skull",
+            "address": "e0:85:e6:99:5a:94"
+        },
+        {
+            "carName": "Ground Shock",
+            "address": "d5:ae:f9:3b:bc:c9"
+        },
+        {
+            "carName": "Thermo",
+            "address": "fd:0d:76:cd:4b:c5"
+        }
+    ]    
 };
 
 // UK Anki
