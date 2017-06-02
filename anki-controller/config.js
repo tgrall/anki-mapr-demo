@@ -59,11 +59,11 @@ module.exports = {
         },
         {
             "carName": "Ground Shock",
-            "address": "d5:ae:f9:3b:bc:c9"
+            "address": "fd:0d:76:cd:4b:c5"
         },
         {
             "carName": "Thermo",
-            "address": "fd:0d:76:cd:4b:c5"
+            "address": "d5:ae:f9:3b:bc:c9"
         }
     ]    
 };
