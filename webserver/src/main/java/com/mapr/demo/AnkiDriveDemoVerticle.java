@@ -92,10 +92,10 @@ public class AnkiDriveDemoVerticle extends AbstractVerticle {
     properties.setProperty("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
     properties.setProperty("value.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
 
-    consumer = new KafkaConsumer<>(properties);"/apps/anki:iot.*");
-    consumer.subscribe(pattern, new SimpleRebalanceList
+    consumer = new KafkaConsumer<>(properties);
 
-    Pattern pattern = Pattern.compile(ener());
+    Pattern pattern = Pattern.compile("/apps/anki:iot.*");
+    consumer.subscribe(pattern, new SimpleRebalanceListener());
 
     EventBus eb = vertx.eventBus();
 
