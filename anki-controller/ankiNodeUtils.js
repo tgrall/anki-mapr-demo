@@ -52,7 +52,7 @@ function sendStateUpdate(msg) {
     var topic = "iot-" + msg.type + "-" + carName;
 
     //console.log("Sending MQTT Message to "+ topic +"\n"+  JSON.stringify(message) );
-    //  client.publish(topic, JSON.stringify(message));
+    //client.publish(topic, JSON.stringify(msg));
     //var target = kafka.topic(encodeURIComponent('/apps/anki:'+topic));
     //target.
     kafka.topic(encodeURIComponent('/apps/anki:' + topic)).produce(JSON.stringify(msg));

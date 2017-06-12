@@ -92,10 +92,10 @@ public class AnkiDriveDemoVerticle extends AbstractVerticle {
     properties.setProperty("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
     properties.setProperty("value.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
 
-    consumer = new KafkaConsumer<>(properties);
+    consumer = new KafkaConsumer<>(properties);"/apps/anki:iot.*");
+    consumer.subscribe(pattern, new SimpleRebalanceList
 
-    Pattern pattern = Pattern.compile("/apps/anki:iot.*");
-    consumer.subscribe(pattern, new SimpleRebalanceListener());
+    Pattern pattern = Pattern.compile(ener());
 
     EventBus eb = vertx.eventBus();
 
@@ -124,21 +124,21 @@ public class AnkiDriveDemoVerticle extends AbstractVerticle {
   private void startDemo(RoutingContext routingContext) {
     System.out.println( ankiController );
 
-
-    client.get( ankiControllerPort, ankiControllerHost, "/startDemo"  ).send( ar -> {
+    client.get( ankiControllerPort, ankiControllerHost, "/startDemoGo"  ).send( ar -> {
       if (ar.succeeded()) {
         HttpResponse<Buffer> response = ar.result();
+
+        routingContext.response()
+                .putHeader("content-type", "text/html; charset=utf-8")
+                .end(response.body());
+
+
         System.out.println("Got HTTP response with status " + response.statusCode());
       } else {
         ar.cause().printStackTrace();
       }
             }
     );
-
-
-    routingContext.response()
-            .putHeader("content-type", "text/html; charset=utf-8")
-            .end("TEST");
 
 
   }
