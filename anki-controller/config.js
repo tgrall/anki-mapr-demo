@@ -25,7 +25,7 @@
  ************************************************/
 
 module.exports = {
-    mode: "discover" // | uk | fr
+    mode: "discover", // | uk | fr
     frCars: [{
             "carName": "Skull",
             "address": "de:d5:50:6b:e0:43"
