@@ -9,26 +9,23 @@ module.exports = function() {
       var timeStamp = (new Date()).getTime();
 
       if (msgId == 0x17) { // ANKI_VEHICLE_MSG_V2C_PING_RESPONSE
-//        console.log("Message[0x"+msgId.toString(16)+"][Ping Response]: ",data);
+        console.log("Message[0x"+msgId.toString(16)+"][Ping Response]: ",data);
       }
 
       else if (msgId == 0x19) { // ANKI_VEHICLE_MSG_V2C_VERSION_RESPONSE
         var version = data.readUInt16LE(2);
-//        console.log("Message["+msgId.toString(16)+"][Version]: "+version.toString(16));
+        console.log("Message["+msgId.toString(16)+"][Version]: "+version.toString(16));
       }
 
       else if (msgId == 0x1b) { // ANKI_VEHICLE_MSG_V2C_BATTERY_LEVEL_RESPONSE
         var level = data.readUInt16LE(2);
-//        var MAX_BATTERY_LEVEL=4200 // This is assumed from experience.
-        var MAX_BATTERY_LEVEL=4250 // This is assumed from experience.
-        var MIN_BATTERY_LEVEL=3400 // This is assumed from experience.
-	var BATTERY_LEVEL_RANGE=MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL
+        var MAX_BATTERY_LEVEL=4200 // This is assumed from experience.
         var msg = {
           "type" : "battery",
           "timeStamp" : timeStamp,
           "carName" : carName,
           "rawLevel" : level,
-          "level" : Math.floor(((level - MIN_BATTERY_LEVEL) / (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL)) * 100)
+          "level" : Math.floor((level / MAX_BATTERY_LEVEL) * 100)
         };
         return msg;
 
@@ -88,7 +85,7 @@ module.exports = function() {
           "speed" : speed,
           "clockwise" : clockwise
         };
-// >>> Tidy output        console.log(msg);
+        console.log(msg);
         return msg;
 
       }
@@ -136,19 +133,19 @@ module.exports = function() {
       }
 
       else if (msgId == 0x2b) { // ANKI_VEHICLE_MSG_V2C_VEHICLE_DELOCALIZED
-//        console.log("Message[0x"+msgId.toString(16)+"][Vehicle Delocalized]: ",data);
+        console.log("Message[0x"+msgId.toString(16)+"][Vehicle Delocalized]: ",data);
       }
 
       else if (msgId == 0x2d) { // ANKI_VEHICLE_MSG_V2C_OFFSET_FROM_ROAD_CENTER_UPDATE
-//        console.log("Message[0x"+msgId.toString(16)+"][Offset From Road Center Update]: ",data);
+        console.log("Message[0x"+msgId.toString(16)+"][Offset From Road Center Update]: ",data);
       }
 
       else if (msgId == 0x41) {
-//        console.log("Message[0x"+msgId.toString(16)+"][???]: ",data);
+        console.log("Message[0x"+msgId.toString(16)+"][???]: ",data);
       }
 
       else {
-//        console.log("Message[0x"+msgId.toString(16)+"][???]: ",data);
+        console.log("Message[0x"+msgId.toString(16)+"][???]: ",data);
       }
   }
   };

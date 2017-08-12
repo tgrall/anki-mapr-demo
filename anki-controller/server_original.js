@@ -721,24 +721,6 @@ app.get('/startDemoGo/', function(req, res) {
 
 });
 
-//////////////////////////////// ADDED TWO FUNCTIONS
-
-app.get('/demoGoFast/', function(req, res) {
-    console.log("GoFast");
-    ankiNodeUtils.demoGoFast();
-    res.send(JSON.stringify({ result: "Success" }));
-    res.end();
-
-});
-
-app.get('/demoStop/', function(req, res) {
-    console.log("Stop");
-    ankiNodeUtils.demoStop();
-    res.send(JSON.stringify({ result: "Success" }));
-    res.end();
-
-});
-
 app.use('/', express.static('apidoc'));
 
 //////////////////////////////////////////////////////////

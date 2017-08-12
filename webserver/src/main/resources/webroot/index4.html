@@ -1,0 +1,442 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="js/vertx/sockjs.min.js"></script>
+    <script src="js/vertx/vertxbus.js"></script>
+
+
+
+<body onload="_setCar()">
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/home">
+                <img alt="Brand" src="image/logo-04.png" width="80" height="26">
+            </a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;<b>Dashboard 1</b></a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="/dashboard.html"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;<b>Dashboard 2</b></a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="/log.html"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;<b>Logs</b></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<center>
+   <img alt="Brand" src="image/architecture.png" style="max-width:70%" />
+   </br>
+   </br>
+   </br>
+</center>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3">
+            <img id="crash_Skull" src="image/crash.jpg" style="display: block; margin: auto auto; align-content: center; max-width:20%; visibility: hidden" />
+        </div>
+        <div class="col-md-3">
+            <img id="crash_GroundShock" src="image/crash.jpg" style="display: block; margin: auto auto; align-content: center; max-width:20%; visibility: hidden" />
+        </div>
+        <div class="col-md-3">
+            <img id="crash_Nuke" src="image/crash.jpg" style="display: block; margin: auto auto; align-content: center; max-width:20%; visibility: hidden" />
+        </div>
+        <div class="col-md-3">
+            <img id="crash_Thermo" src="image/crash.jpg" style="display: block; margin: auto auto; align-content: center; max-width:20%; visibility: hidden" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 align="center">Skull</h2>
+        </div>
+        <div class="col-md-3">
+            <h2 align="center">Ground Shock</h2>
+        </div>
+        <div class="col-md-3">
+            <h2 align="center">Nuke</h2>
+        </div>
+        <div class="col-md-3">
+            <h2 align="center">Thermo</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3" style="align-content: center">
+            <div style="align-content: center" id="SkullSpeedGaugeContainer"></div>
+        </div>
+        <div class="col-md-3" style="align-content: center">
+            <div style="align-content: center" id="GroundShockSpeedGaugeContainer"></div>
+        </div>
+        <div class="col-md-3">
+            <div style="align-content: center" id="NukeSpeedGaugeContainer"></div>
+        </div>
+        <div class="col-md-3" style="align-content: center">
+            <div style="align-content: center" id="ThermoSpeedGaugeContainer"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <br/>
+
+            <div class="progress">
+                <div id="SkullBatteryLevel" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span id="current-progress"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <br/>
+
+            <div class="progress">
+                <div id="GroundShockBatteryLevel" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span id="current-progress"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <br/>
+
+            <div class="progress">
+                <div id="NukeBatteryLevel" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span id="current-progress"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <br/>
+
+            <div class="progress">
+                <div id="ThermoBatteryLevel" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span id="current-progress"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+		<label>Car:</label>
+		<select id="_carList" onChange="_setCar()">
+			<option value = "Skull">Skull</option>
+			<option value = "Ground Shock">Ground Shock</option>
+			<option value = "Nuke">Nuke</option>
+			<option value = "Thermo">Thermo</option>
+		</select>
+        </div>
+        <div class="col-md-3">
+		<label>Speed:</label>
+		<select id="_speedList">
+			<option value = "0">0</option>
+			<option value = "100">100</option>
+			<option value = "200">200</option>
+			<option value = "300">300</option>
+			<option value = "400">400</option>
+			<option value = "500">500</option>
+			<option value = "600">600</option>
+			<option value = "700">700</option>
+			<option value = "800">800</option>
+			<option value = "900">900 (Careful!)</option>
+			<option value = "1000">1000 (Careful!)</option>
+		</select>
+        </div>
+        <div class="col-md-3" style="text-align: center">
+		<input id="_moveLeft" type="button" value="Move Left" onclick="_moveLeft()">
+        </div>
+        <div class="col-md-3" style="text-align: center">
+		<input id="_scan" type="button" value="Scan" onclick="_scan()">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+		<label>Controlling:</label>
+		<span id="_car"</span>
+        </div>
+        <div class="col-md-3" style="text-align: center">
+		<input id="_setSpeed" type="button" value="Set Speed" onclick="_setSpeed()">
+        </div>
+        <div class="col-md-3" style="text-align: center">
+		<input id="_moveRight" type="button" value="Move Right" onclick="_moveRight()">
+        </div>
+        <div class="col-md-3" style="text-align: center">
+		<input id="_connect" type="button" value="Connect" onclick="_connect()">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+        </div>
+        <div class="col-md-1" style="text-align: center">
+		<input id="_start" type="button" value="Slow" onclick="_start()">
+        </div>
+        <div class="col-md-1" style="text-align: center">
+		<input id="_fast" type="button" value="Fast" onclick="_fast()">
+        </div>
+        <div class="col-md-1" style="text-align: center">
+		<input id="_stop" type="button" value="Stop" onclick="_stop()">
+        </div>
+    </div>
+
+</div> <!-- /container -->
+
+
+
+<hr />
+
+
+<!-- Include dependencies -->
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/jquery/jquery-ui-widget.min.js"></script>
+<script src="js/d3/d3.min.js"></script>
+
+<script type="text/javascript" src="./js/d3/gauge.js"></script>
+
+<script src="js/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script>
+    var gauges = [];
+    var cars = [ "Skull", "GroundShock", "Nuke", "Thermo" ]
+    var posMsg = [ false, false, false, false ];
+    var batMsg = [ false, false, false, false ];
+    var anyPosMsg = [ false, false, false, false ];
+
+    function createGauge(name, label, min, max)
+    {
+        var config =
+        {
+            size: 300,
+            label: label,
+            min: undefined != min ? min : 0,
+            max: undefined != max ? max : 1300,
+            minorTicks: 5
+        }
+
+        var range = config.max - config.min;
+        config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+        config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+
+        gauges[name] = new Gauge(name + "GaugeContainer", config);
+        gauges[name].render();
+    }
+
+    function createGauges()
+    {
+        createGauge("SkullSpeed", "Speed");
+        createGauge("GroundShockSpeed", "Speed");
+        createGauge("NukeSpeed", "Speed");
+        createGauge("ThermoSpeed", "Speed");
+    }
+
+//    function updateSpeed(car, value)
+    function updateSpeed(car, value, realMsg)
+    {
+        console.log( "speed "+ car +" "+ value )
+
+        gauges[car+ "Speed"].redraw(value);
+        posMsg[cars.indexOf(car)] = realMsg;
+        if (realMsg) {
+           anyPosMsg[cars.indexOf(car)] = true;
+           _setVisible("crash_" + car, false);
+        }
+    }
+
+//    function updateBattery(car, value) {
+    function updateBattery(car, value, realMsg) {
+        $("#"+ car  +"BatteryLevel")
+                .css("width", value + "%")
+                .attr("aria-valuenow", value)
+                .text(value + "%");
+        batMsg[cars.indexOf(car)] = realMsg;
+    }
+
+
+    function initialize()
+    {
+        createGauges();
+    }
+
+
+    var eb = new vertx.EventBus("http://" + location.host + "/eventbus");
+    eb.onopen = function() {
+        console.log("open");
+        eb.registerHandler("dashboard", function(data) {
+            var entry = JSON.parse(data);
+            console.log(data);
+            if (entry.type == "position") {
+//                updateSpeed(entry.carName, entry.speed);
+                updateSpeed(entry.carName, entry.speed, true);
+            } else if (entry.type == "battery") {
+//                updateBattery( entry.carName, entry.level );
+                updateBattery( entry.carName, entry.level, true );
+            }
+        });
+    };
+
+
+   function _checkMsg() {
+//      console.log("_checkPosMsg");
+      // Could be made nicer by looping through the keys in the cars array or using an enumeration of sorts
+      if (posMsg[cars.indexOf("Skull")] == false) updateSpeed("Skull", 0, false);
+      if (posMsg[cars.indexOf("GroundShock")] == false) updateSpeed("GroundShock", 0, false);
+      if (posMsg[cars.indexOf("Nuke")] == false) updateSpeed("Nuke", 0, false);
+      if (posMsg[cars.indexOf("Thermo")] == false) updateSpeed("Thermo", 0, false);
+      if (batMsg[cars.indexOf("Skull")] == false)  updateBattery("Skull", 0, false);
+      if (batMsg[cars.indexOf("GroundShock")] == false) updateBattery("GroundShock", 0, false);
+      if (batMsg[cars.indexOf("Nuke")] == false) updateBattery("Nuke", 0, false);
+      if (batMsg[cars.indexOf("Thermo")] == false) updateBattery("Thermo", 0, false);
+
+      console.log("Checking for crash");
+      for (var i = 0; i < cars.length; i++) {
+         carName = cars[i];
+         if ((batMsg[i] == true) && (posMsg[i] == false) && (anyPosMsg[i] == true)) {  // am I getting battery, but no longer getting position
+            _setVisible("crash_" + carName, true);
+         }
+         if ((batMsg[i] == false) && (posMsg[i] == false)) {
+            _setVisible("crash_" + carName, false);
+         }
+      }
+
+      posMsg[cars.indexOf("Skull")] = false;
+      posMsg[cars.indexOf("GroundShock")] = false;
+      posMsg[cars.indexOf("Nuke")] = false;
+      posMsg[cars.indexOf("Thermo")] = false;
+      batMsg[cars.indexOf("Skull")] = false;
+      batMsg[cars.indexOf("GroundShock")] = false;
+      batMsg[cars.indexOf("Nuke")] = false;
+      batMsg[cars.indexOf("Thermo")] = false;
+   }
+   setInterval(_checkMsg,3200);
+
+   function _setVisible(id, vis) {
+//      alert(id)
+      document.getElementById(id).style.visibility = (vis ? 'visible' : 'hidden');
+   }
+
+
+   function _setCar()
+   {
+      document.getElementById("_car").innerHTML=document.getElementById("_carList").value;
+   }
+
+   function _setSpeed()
+   {
+      var url = "http://anki:7877/setSpeed/" + document.getElementById("_carList").value + "/" + document.getElementById("_speedList").value
+//      alert("setSpeed called:" + url);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.send();      
+   }
+
+   function _moveLeft()
+   {
+      var url1 = "http://anki:7877/setLaneOffset/" + document.getElementById("_carList").value + "/0" 
+      var url2 = "http://anki:7877/changeLanes/" + document.getElementById("_carList").value + "/-24"
+//      alert("moveLeft called:" + url1);
+//      alert("moveLeft called:" + url2);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url1, true);
+      xhr.send();      
+      xhr.open('POST', url2, true);
+      xhr.send();      
+   }
+
+   function _moveRight()
+   {
+      var url1 = "http://anki:7877/setLaneOffset/" + document.getElementById("_carList").value + "/0" 
+      var url2 = "http://anki:7877/changeLanes/" + document.getElementById("_carList").value + "/24"
+//      alert("moveRight called:" + url1);
+//      alert("moveRight called:" + url2);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url1, true);
+      xhr.send();      
+      xhr.open('POST', url2, true);
+      xhr.send();      
+   }
+
+   function _connect()
+   {
+      var url1 = "http://anki:7877/startDemoConnect/"
+//      alert("connect called:" + url1);
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url1, true);
+      xhr.send();      
+   }
+
+   function _scan()
+   {
+      var url = "http://anki:7877/rescan/"
+//      alert("rescan called:" + url);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.send();      
+   }
+
+   function _start()
+   {
+      var url = "http://anki:7877/startDemoGo/"
+//      alert("startDemoGo called:" + url);
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.send();      
+   }
+
+   function _fast()
+   {
+      var url = "http://anki:7877/demoGoFast/"
+//      alert("startDemoGo called:" + url);
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.send();      
+   }
+
+   function _stop()
+   {
+      var url = "http://anki:7877/demoStop/"
+//      alert("demoStop called:" + url);
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.send();      
+   }
+
+   initialize();
+
+
+
+</script>
+
+
+
+</body>
+</html>
