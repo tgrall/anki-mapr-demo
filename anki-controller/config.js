@@ -1,28 +1,28 @@
 /************************************************
  * Configuration file for the application
- * 
- * mode: 
+ *
+ * mode:
  *  if you have configured the kit name (eg : fr | uk | nl) and set the list of cars
  *  mode : uk-> will use the UK cars
  *  mode : fr-> will use the FR cars
  *  mode : nl-> will use the NL cars
  *  node : discover -> will use any "cars" with the risk of conflict
- * 
+ *
  * cars : OPTIONAL
  *  contains the list of Car addresses and name
- *  if the cars list is EMPTY : the application will use the devices 
+ *  if the cars list is EMPTY : the application will use the devices
  *  found using the scan. This could be in conflict with other Anki kits
- * 
+ *
  *  Set the list of values when you want to force specific cars to be used
  *  by the demo.
- * 
+ *
  *  if you are alone just:
  *    - put the mode to "discover"
  *    - or cars should be empty
- * 
+ *
  * See below for the values of UK, FR, NL kits
- * 
- * 
+ *
+ *
  ************************************************/
 
 module.exports = {
@@ -53,17 +53,14 @@ module.exports = {
             "address": "e6:25:f8:72:c8:1d",
         }
     ],
-    nlCars: [{
-            "carName": "Skull",
-            "address": "e0:85:e6:99:5a:94"
-        },
-        {
-            "carName": "Ground Shock",
-            "address": "fd:0d:76:cd:4b:c5"
-        },
+    nlCars: [
         {
             "carName": "Thermo",
-            "address": "d5:ae:f9:3b:bc:c9"
+            "address": "ee:83:e8:b7:17:d2",
+        },
+        {
+            "carName": "Nuke",
+            "address": "d6:11:61:3f:e9:b4"
         }
     ]    
 };
